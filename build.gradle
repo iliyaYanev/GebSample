@@ -1,0 +1,40 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    ext {
+        groovyAllVersion = "3.0.0"
+        gebCoreVersion = "4.0"
+        spockVersion = "2.0-M2-groovy-3.0"
+        seleniumVersion = "3.141.59"
+    }
+}
+
+plugins {
+    id 'groovy'
+    id 'java'
+}
+
+group 'org.qualityhouse'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    dependencies {
+        compile "org.gebish:geb-core:${gebCoreVersion}"  // Geb
+        compile "org.gebish:geb-spock:${gebCoreVersion}"
+        // Geb integration with Spock test framework
+        compile("org.spockframework:spock-core:${spockVersion}") {  // Spock test framework
+            compile "org.seleniumhq.selenium:selenium-java:${seleniumVersion}" // Selenium framework
+        }
+        compile 'com.github.javafaker:javafaker:1.0.2'
+
+
+        test {
+            useJUnitPlatform()
+        }
+    }
+}
