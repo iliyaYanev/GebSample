@@ -6,6 +6,7 @@ class HomePage extends BasePage {
         categoriesMenuLabel.isDisplayed()
     }
 
+    //https://gebish.org/manual/3.3/#css-selectors
     static content = {
         contentContainer            { $("#contcont") }
         categoriesMenuLabel         { $("#cat") }

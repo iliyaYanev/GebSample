@@ -1,4 +1,3 @@
-import org.openqa.selenium.UnexpectedAlertBehaviour
 import org.openqa.selenium.WebDriverException
 import org.openqa.selenium.chrome.ChromeDriver
 import org.openqa.selenium.chrome.ChromeOptions

@@ -5,6 +5,7 @@ import PageObjects.HomePage
 import PageObjects.ProdDetailsPage
 import com.github.javafaker.Faker
 import spock.lang.Shared
+import spock.lang.Unroll
 
 class HomePageSpec extends BaseSpec {
 
@@ -27,21 +28,26 @@ class HomePageSpec extends BaseSpec {
             at HomePage
     }
 
+    @Unroll("add #productName to cart")
     void addItemToCart() {
         given: "We are at the home page"
             HomePage homePage = at HomePage
         when: "Click on the laptops category"
             homePage.clickLaptopsCategory()
-            homePage.clickProductByName("MacBook air")
+            homePage.clickProductByName(productName)
         then: "We are at the product details page"
             ProdDetailsPage prodDetailsPage = at ProdDetailsPage
         and: "The correct product is displayed"
-            prodDetailsPage.getProductNameValue() == "MacBook air"
-            prodDetailsPage.getProductPriceValue() == "\$700 *includes tax"
+            prodDetailsPage.getProductNameValue() == productName
+            prodDetailsPage.getProductPriceValue() == productPrice
         when: "add the product to the cart"
             prodDetailsPage.clickAddToCartButton()
         then: "the product is successfully added"
             prodDetailsPage.isProductAddedToCart()
+        where:
+            productName    | productPrice
+            "MacBook air"  | "\$700 *includes tax"
+            "Sony vaio i7" | "\$790 *includes tax"
     }
 
     void purchaseItem() {
