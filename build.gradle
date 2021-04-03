@@ -38,3 +38,13 @@ dependencies {
         }
     }
 }
+
+task homePageTests(type: Test) {
+    group = 'Verification'
+    systemProperties = System.properties
+    systemProperty 'geb.env', 'local'
+    systemProperty 'spock.configuration', 'HomePageTestsSpockConfig.groovy'
+    testLogging {
+        events 'started', 'passed'
+    }
+}

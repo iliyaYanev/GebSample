@@ -15,7 +15,7 @@ class HomePage extends BasePage {
         home                        { $(".nav-link", text: "Home") }
         contact                     { $(".nav-link", text: "Contact") }
         aboutUs                     { $(".nav-link", text: "About us") }
-        cart                        { $(".nav-link", text: "Cart") }
+        cart                        { $("#cartur", text: "Cart") }
         signUp                      { $(".nav-link", text: "Sign up") }
         nextButton                  { $("#next2") }
         prevButon                   { $("#prev2")}
