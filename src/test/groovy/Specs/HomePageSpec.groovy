@@ -8,7 +8,6 @@ import spock.lang.Shared
 import spock.lang.Stepwise
 import spock.lang.Unroll
 
-@Stepwise
 class HomePageSpec extends BaseSpec {
 
     @Shared

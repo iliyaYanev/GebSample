@@ -38,7 +38,19 @@ templateOptions {
 
 driver = {
     // See https://chromium.googlesource.com/chromium/src/+/master/chrome/common/chrome_switches.cc
-    File chromeDriverPath = new File('src/test/resources/driver/chromedriver.exe')
+    File chromeDriverPath
+    String osName = System. getProperty("os.name")
+
+    if (osName.contains('Windows')) {
+        chromeDriverPath = new File('src/test/resources/driver/Windows/chromedriver.exe')
+    }
+    else if (osName.contains('Linux')) {
+        chromeDriverPath = new File('src/test/resources/driver/Linux/chromedriver')
+    }
+    else {
+        chromeDriverPath = new File('src/test/resources/driver/Mac/chromedriver')
+    }
+
     System.setProperty('webdriver.chrome.driver', chromeDriverPath.absolutePath)
     ChromeOptions options = new ChromeOptions()
     def headless = System.getProperty("headless")?.toLowerCase() == "true"
