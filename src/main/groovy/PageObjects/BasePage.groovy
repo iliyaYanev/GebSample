@@ -8,6 +8,8 @@ import org.openqa.selenium.interactions.Actions
 import org.openqa.selenium.support.ui.ExpectedConditions
 import org.openqa.selenium.support.ui.WebDriverWait
 
+import java.time.Duration
+
 class BasePage extends Page {
 
     void clickBrowserBackButton(){
@@ -43,11 +45,11 @@ class BasePage extends Page {
 
     void scrollToTopOfPage(){
         ((JavascriptExecutor) driver)
-                .executeScript("window.scrollTo(document.body.scrollHeight, 0)")
+                .executeScript("window.scrollTo(document.body.x, 0)")
     }
 
     String getAlertText() {
-        WebDriverWait wait = new WebDriverWait(driver, 1);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(1));
         wait.until(ExpectedConditions.alertIsPresent());
         driver.switchTo().alert().getText()
     }

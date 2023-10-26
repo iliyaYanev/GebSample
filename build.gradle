@@ -3,10 +3,11 @@ buildscript {
         mavenCentral()
     }
     ext {
-        groovyAllVersion = "3.0.0"
-        gebCoreVersion = "4.0"
-        spockVersion = "2.0-M2-groovy-3.0"
-        seleniumVersion = "3.141.59"
+        groovyAllVersion = "4.0.15"
+        gebCoreVersion = "7.0"
+        spockVersion = "2.4-M1-groovy-4.0"
+        seleniumVersion = "4.14.1"
+        javaFakerVersion = "1.0.2"
     }
 }
 
@@ -23,25 +24,23 @@ repositories {
 }
 
 dependencies {
-    dependencies {
-        compile "org.gebish:geb-core:${gebCoreVersion}"  // Geb
-        compile "org.gebish:geb-spock:${gebCoreVersion}"
-        // Geb integration with Spock test framework
-        compile("org.spockframework:spock-core:${spockVersion}") {  // Spock test framework
-            compile "org.seleniumhq.selenium:selenium-java:${seleniumVersion}" // Selenium framework
-        }
-        compile 'com.github.javafaker:javafaker:1.0.2'
+    implementation "com.github.javafaker:javafaker:${javaFakerVersion}"
 
-
-        test {
-            useJUnitPlatform()
-        }
-    }
+    implementation "org.gebish:geb-core:${gebCoreVersion}"  // Geb
+    implementation "org.gebish:geb-spock:${gebCoreVersion}"
+    // Geb integration with Spock test framework
+    implementation "org.spockframework:spock-core:${spockVersion}"
+    implementation "org.seleniumhq.selenium:selenium-java:${seleniumVersion}"
+    implementation "org.seleniumhq.selenium:selenium-chrome-driver:${seleniumVersion}"
 }
 
-task homePageTests(type: Test) {
+test {
+    useJUnitPlatform()
+}
+
+tasks.register('homePageTests', Test) {
     group = 'Verification'
-    systemProperties = System.properties
+    systemProperties = System.properties as Map<String, ?>
     systemProperty 'geb.env', 'local'
     systemProperty 'spock.configuration', 'HomePageTestsSpockConfig.groovy'
     testLogging {

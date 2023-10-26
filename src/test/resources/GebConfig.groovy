@@ -37,21 +37,6 @@ templateOptions {
 }
 
 driver = {
-    // See https://chromium.googlesource.com/chromium/src/+/master/chrome/common/chrome_switches.cc
-    File chromeDriverPath
-    String osName = System. getProperty("os.name")
-
-    if (osName.contains('Windows')) {
-        chromeDriverPath = new File('src/test/resources/driver/Windows/chromedriver.exe')
-    }
-    else if (osName.contains('Linux')) {
-        chromeDriverPath = new File('src/test/resources/driver/Linux/chromedriver')
-    }
-    else {
-        chromeDriverPath = new File('src/test/resources/driver/Mac/chromedriver')
-    }
-
-    System.setProperty('webdriver.chrome.driver', chromeDriverPath.absolutePath)
     ChromeOptions options = new ChromeOptions()
     def headless = System.getProperty("headless")?.toLowerCase() == "true"
 
@@ -92,7 +77,7 @@ driver = {
 
     options.setCapability( "goog:loggingPrefs", logPrefs )
     options.setExperimentalOption("prefs", chromePrefs)
-    options.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true)
+    options.setCapability(CapabilityType.ACCEPT_INSECURE_CERTS, true)
 
     // Setting up the Web Driver
     try {
