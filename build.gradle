@@ -6,7 +6,7 @@ buildscript {
         groovyAllVersion = "4.0.15"
         gebCoreVersion = "7.0"
         spockVersion = "2.4-M1-groovy-4.0"
-        seleniumVersion = "4.14.1"
+        seleniumVersion = '4.23.0'
         javaFakerVersion = "1.0.2"
     }
 }
